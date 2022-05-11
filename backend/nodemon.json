@@ -1,0 +1,6 @@
+{
+  "events": {
+    "crash": "sh -c 'lsof -i :$(cat .env | grep PORT | cut -d= -f 2) -t | xargs kill 2>/dev/null;'"
+  },
+  "delay": "1500"
+}
