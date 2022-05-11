@@ -2,15 +2,18 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node app.js",
-    "dev": "nodemon app.js"
+    "start": "lsof -i :$(cat .env | grep PORT | cut -d '=' -f 2) -t | xargs kill 2>/dev/null; clear && node app.js",
+    "dev": " nodemon --delay 500ms -q -x 'npm run start'"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Simon Hryszko",
+  "license": "MIC",
   "dependencies": {
+    "body-parser": "^1.20.0",
+    "dotenv": "^16.0.1",
     "express": "^4.18.1",
+    "mongodb": "^4.5.0",
     "nodemon": "^2.0.16"
   }
 }
