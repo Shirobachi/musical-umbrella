@@ -133,5 +133,38 @@ router.get('/', async (req, res) => {
 	})
 });
 
+router.post('/verify', async (req, res) => {
+	const token = req.body.token;
+
+	if (!token) {
+		res.status(400).json({
+			message: 'Missing required fields'
+		})
+		return
+	}
+
+	const JWT_SECRET = process.env.JWT_SECRET;
+	try{
+		var decoded = jwt.verify(token, JWT_SECRET);
+	}
+	catch (err) {
+		res.status(401).json({
+			message: 'Token is not valid'
+		})
+		return
+	}
+
+	// get user from database
+	const db = await common.connectDB('users');
+	const user = await db.findOne({
+		email: decoded
+	});
+
+	res.status(200).json(user);
+
+});
+
+
+
 
 module.exports = router;
