@@ -7,7 +7,7 @@ export const useTokenStore = defineStore('token', {
 		let token = localStorage.getItem('token');
 
 		return {
-			token: token || "NULL",
+			token: token || "",
 		}
 	},
 
@@ -15,6 +15,10 @@ export const useTokenStore = defineStore('token', {
 		setToken(token) {
 			localStorage.setItem('token', token);
 			this.token = token
+		},
+		clearToken() {
+			localStorage.removeItem('token');
+			this.token = null;
 		}
-	},
+	}
 })
