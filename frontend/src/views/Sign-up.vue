@@ -43,7 +43,7 @@
 
 			<!-- INPUT: name -->
 			<div class="mb-4">
-				<div class="flex-col space-y-2 justify-center">
+				<div class="flex flex-col space-y-2 items-center justify-center">
 					<input class="w-11/12 focus:w-full bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
 						type="text"
 						placeholder="name"
@@ -66,7 +66,7 @@
 			<!-- SUBMIT -->
 			<div class="flex items-center justify-center">
 				<button @click="submit" class="bg-blue-500 hover:bg-blue-700 text-dark font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
-					Sign In
+					Sign up
 				</button>
 			</div>
 		</form>
