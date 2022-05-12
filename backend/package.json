@@ -4,8 +4,8 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "lsof -i :$(cat .env | grep PORT | cut -d '=' -f 2) -t | xargs kill 2>/dev/null; clear && node app.js",
-    "dev": " nodemon --delay 500ms -q -x 'npm run start'"
+    "start": "node app.js",
+    "dev": " nodemon --delay 500ms -q -x 'lsof -i :$(cat .env | grep PORT | cut -d '=' -f 2) -t | xargs kill 2>/dev/null; clear && npm run start'"
   },
   "author": "Simon Hryszko",
   "license": "MIC",
