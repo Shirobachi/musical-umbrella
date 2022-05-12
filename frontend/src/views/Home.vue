@@ -12,8 +12,6 @@
 
 <template>
 	<div>
-		Test: {{counter.count}}
 		<!-- button -->
-		<button @click="counter.increment">Increment</button>
 	</div>
 </template>
