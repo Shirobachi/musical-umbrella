@@ -64,7 +64,6 @@
 			</div>
 		</form>
 
-	{{token.token}}
 	</div>
 
 
