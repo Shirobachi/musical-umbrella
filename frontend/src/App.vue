@@ -1,5 +1,6 @@
 <script setup>
 	import Menu from './components/Menu.vue';
+	import Footer from './components/Footer.vue';
 
 	const menuItems = {
 		mainMenu: [
@@ -30,6 +31,7 @@
 
 		<Menu :menuItems='menuItems'/>
 		<router-view></router-view>
+		<Footer/>
 
 	</div>
 </template>
