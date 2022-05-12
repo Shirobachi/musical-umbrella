@@ -36,7 +36,7 @@
 				<!-- RIGHT MENU -->
 				<div class="hidden md:flex items-center space-x-1">
 					<!-- for items -->
-					<div v-for="(item, index) in menuItems.optionalManu" :key="index">
+					<div v-for="(item, index) in menuItems.optionalMenu" :key="index">
 						<router-link :to="item.link" 
 							class="py-2 my-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">
 							{{ item.name }}
@@ -53,7 +53,7 @@
 			</div> <!-- end of flex-->
 
 			<!-- mobile menu -->
-			<div v-if="mobile" class="mobile-menu">
+			<div v-if="mobile" class="md:hidden mobile-menu">
 				<ul class="">
 					<!-- for main manu items -->
 					<div v-for="(item, index) in menuItems.mainMenu" :key="index">
@@ -64,7 +64,7 @@
 						</router-link>
 					</div>
 					<!-- for optional items -->
-					<div v-for="(item, index) in menuItems.optionalManu" :key="index">
+					<div v-for="(item, index) in menuItems.optionalMenu" :key="index">
 						<router-link :to="item.link" 
 							class="block text-sm px-2 py-4 hover:bg-green-500 transition duration-300"
 							active-class="block text-sm px-2 py-4 text-white bg-green-500 font-semibold">
