@@ -15,12 +15,12 @@
 		], 
 		optionalManu: [
 			{
-				name: 'login',
-				link: '/',
+				name: 'Sign in',
+				link: '/sign-in',
 			},
 			{
-				name: 'register',
-				link: 'sadas',
+				name: 'Sign up',
+				link: '/sign-up',
 			},
 		]
 	}
@@ -30,7 +30,7 @@
 	<div class="container">
 
 		<Menu :menuItems='menuItems'/>
-		<router-view></router-view>
+		<router-view class="my-10"></router-view>
 		<Footer/>
 
 	</div>
