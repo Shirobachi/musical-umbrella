@@ -3,6 +3,7 @@
 	import { computed, ref } from 'vue';
   import { useToast } from "vue-toastification";
   import axios from "axios";
+	import router from '../router'
 
 	const Toast = useToast();
 	const base_URI = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
@@ -28,6 +29,7 @@
 		}).then(() => {
 			Toast.success('Successfully signed up, you can now log in!');
 			// redirect to login
+			router.push('/sign-in');
 		}).catch((e) => {
 			if (e.response.data)
 				Toast.error( e.response.data.message || "We struggling with goblins on out server 👺" );

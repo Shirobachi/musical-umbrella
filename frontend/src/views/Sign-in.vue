@@ -4,6 +4,7 @@
   import { useToast } from "vue-toastification";
   import axios from "axios";
 	import { useTokenStore } from '../stores/token'
+	import router from '../router'
 
 	const token = useTokenStore()
 	const Toast = useToast();
@@ -28,6 +29,7 @@
 		}).then((r) => {
 			Toast.success('Successfully logged in!');	
 			token.setToken(r.data.token);
+			router.push('/');
 		}).catch((e) => {
 			if (e.response.data)
 				Toast.error( e.response.data.message || "We struggling with goblins on out server 👺" );
