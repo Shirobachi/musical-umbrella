@@ -48,7 +48,7 @@ router.post('/', async (req, res) => {
 	}
 
 	// Check if password is secure
-	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+	const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/;
 	if (!passwordRegex.test(req.body.password)) {
 		res.status(400).json({
 			message: 'Password is not secure'
