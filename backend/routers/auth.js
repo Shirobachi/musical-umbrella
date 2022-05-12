@@ -2,7 +2,6 @@ const express = require('express');
 const common = require('../common'); // Import common.js with the functions
 const router = express.Router();
 const bcrypt = require('bcrypt');
-const e = require('express');
 const jwt = require('jsonwebtoken'); // jwt
 
 // 201: return object with added user, req object with user
