@@ -3,6 +3,7 @@
 	import Footer from './components/Footer.vue';
 	import { useTokenStore } from './stores/token'
 	import { computed } from 'vue';
+import { c } from '../dist/assets/index.10d5764e';
 
 	const token = useTokenStore()
 
@@ -12,15 +13,12 @@
 				{
 					name: 'Home',
 					link: '/',
-				},
-				{
-					name: 'Something',
-					link: 'sadas',
-				},
+				}
 			], 
 			optionalMenu: []
 		}
 
+		// add account buttons
 		console.log("🚀 ~ file: App.vue ~ line 25 ~ menuItems ~ token.token", token.token? "true": "false");
 		if (!token.token) {
 			temp.optionalMenu = [
@@ -41,6 +39,15 @@
 					link: '/sign-out',
 				},
 			]
+		}
+
+		// add admin buttons
+      console.log("🚀 ~ file: App.vue ~ line 46 ~ menuItems ~ token.token", token.token)
+		if (token.token.isAdmin) {
+			temp.mainMenu.push({
+				name: 'Admin',
+				link: '/admin',
+			})
 		}
 
 		return temp;
