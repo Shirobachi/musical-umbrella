@@ -27,18 +27,18 @@
 
 	const add = () => {
 		// print in console office as string
-		console.log(JSON.stringify(office));
+		console.log(JSON.stringify(props.office));
 
 		axios({
 			method: 'post',
-			url: `${VITE_BASE_BACKEND_ENDPOINT}/office/`,
+			url: `${VITE_BASE_BACKEND_ENDPOINT}/offices/`,
 			headers: {
 				'Authorization': `Bearer ${token.token.token}`
 			},
 			data: props.office
 		}).then(r => {
 			Toast.info("Office added!");
-			router.push('/admin');
+			router.push('/offices/1');
 		}).catch(e => {
 			console.log(e);
 			Toast.error(VITE_DEBUG ? 'Error: ' + e.message : 'Something went wrong!');

@@ -18,7 +18,7 @@ const auth = require('./routers/auth');
 app.use('/auth', auth);
 
 const office = require('./routers/office');
-app.use('/office', office);
+app.use('/offices', office);
 
 // START
 app.listen(port, () => {

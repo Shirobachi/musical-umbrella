@@ -40,9 +40,27 @@ async function isAdmin(token){
 	const user = await decode(token);
 	return user.admin;
 }
+
+function paging(arr, setting){
+	const page = setting.page || 1;
+	const perPage = setting.perPage || 3;
+	const start = (page - 1) * perPage;
+	const end = page * perPage;
+	return {
+		items: arr.slice(start, end),
+		total: arr.length,
+		pages: Math.ceil(arr.length / perPage),
+		page: page,
+		perPage: perPage,
+		firstPageToShow: Math.max(1, parseInt(page) - 2),
+		lastPageToShow: Math.min(parseInt(page) + 2, Math.ceil(arr.length / perPage)),
+	};
+}
+
 // export
 module.exports = {
 	connectDB,
 	decode,
 	isAdmin,
+	paging,
 }

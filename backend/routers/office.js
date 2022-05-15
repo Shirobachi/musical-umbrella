@@ -6,8 +6,14 @@ const router = express.Router();
 // POST 'office': data office{}, auth: token
 router.post('/', async (req, res) => {
 	// console barer token
-	const token = req.headers.authorization.split(' ')[1];
-	const isAdmin = await common.isAdmin(token);
+	const token = req.headers.authorization;
+	if (!token) {
+		return res.status(401).json({
+			error: 'No token provided.'
+		});
+	}
+
+	const isAdmin = await common.isAdmin(token.split(' ')[1]);
 
 	if (!isAdmin)
 		return res.status(401).json({
@@ -16,7 +22,6 @@ router.post('/', async (req, res) => {
 
 	// get data from request
 	const office = req.body;		
-  console.log("🚀 ~ file: office.js ~ line 19 ~ router.post ~ office", office)
 
 	// connect to DB
 	const db = await common.connectDB('offices');
@@ -33,5 +38,40 @@ router.post('/', async (req, res) => {
 	}
 }); 
 
+
+// GET '/': get all offices, auth: token
+router.get('/', async (req, res) => {
+	// console barer token
+	const token = req.headers.authorization;
+	if (!token) {
+		return res.status(401).json({
+			error: 'No token provided.'
+		});
+	}
+
+	const user = await common.decode(token.split(' ')[1]);
+	if(!user)
+		return res.status(401).json({
+			error: 'Unauthorized',
+		});
+
+	// connect to DB
+	const db = await common.connectDB('offices');
+
+	// Get all
+	try{
+		const offices = await db.find().toArray();
+	
+		const settings = req.query || {};
+    console.log("🚀 ~ file: office.js ~ line 66 ~ router.get ~ settings", settings)
+		res.status(200).json(common.paging(offices, settings));
+	}
+	catch(err){
+		res.status(500).json({
+			error: err.message,
+		});
+	}
+
+});
 
 module.exports = router;

@@ -19,7 +19,6 @@ import { c } from '../dist/assets/index.10d5764e';
 		}
 
 		// add account buttons
-		console.log("🚀 ~ file: App.vue ~ line 25 ~ menuItems ~ token.token", token.token? "true": "false");
 		if (!token.token) {
 			temp.optionalMenu = [
 				{
@@ -42,11 +41,10 @@ import { c } from '../dist/assets/index.10d5764e';
 		}
 
 		// add admin buttons
-      console.log("🚀 ~ file: App.vue ~ line 46 ~ menuItems ~ token.token", token.token)
 		if (token.token.isAdmin) {
 			temp.mainMenu.push({
 				name: 'Admin',
-				link: '/admin',
+				link: '/offices/1',
 			})
 		}
 
