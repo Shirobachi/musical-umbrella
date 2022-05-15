@@ -6,13 +6,14 @@
 	import router from '../router'
 
 	const Toast = useToast();
-	const base_URI = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
+	const VITE_BASE_BACKEND_ENDPOINT = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
+	const VITE_DEBUG = import.meta.env.VITE_DEBUG;
 
 	const user = ref({
-		name: '',
-		email: '',
-		password: '',
-		passwordConfirmation: '',
+		name: VITE_DEBUG ? 'Tester' : '',
+		email: VITE_DEBUG ? 'test@example.com' : '',
+		password: VITE_DEBUG ? '2WxU0Gkx2q8VbcTPuNrJHonPuQn9yGLmIdvaMKfNuwD3ZwX3' : '',
+		passwordConfirmation: VITE_DEBUG ? '2WxU0Gkx2q8VbcTPuNrJHonPuQn9yGLmIdvaMKfNuwD3ZwX3' : '',
 	})
 
 	const submit = () => {
@@ -20,11 +21,11 @@
 			return Toast.error('Passwords do not match');
 		}
 
-		console.log(`${base_URI}/auth`)
+		console.log(`${VITE_BASE_BACKEND_ENDPOINT}/auth`)
 
 		axios({
 			method: 'POST',
-			url: `${base_URI}/auth`,
+			url: `${VITE_BASE_BACKEND_ENDPOINT}/auth`,
 			data: user.value,
 		}).then(() => {
 			Toast.success('Successfully signed up, you can now log in!');
@@ -32,9 +33,9 @@
 			router.push('/sign-in');
 		}).catch((e) => {
 			if (e.response.data)
-				Toast.error( e.response.data.message || "We struggling with goblins on out server 👺" );
+				Toast.error( e.response.data.message || VITE_DEBUG ? '🚩 We have problem with response!' : "We struggling with goblins on out server 👺" );
 			else
-				Toast.error( "We struggling with goblins on out server 👺" );
+				Toast.error( (VITE_DEBUG) ? "🔨 Did you start backend server?" : "We struggling with goblins on out server 👺" );
 		});
 	}
 </script>
