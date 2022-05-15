@@ -16,7 +16,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
         
       - name: Change dir
-        run: cp backend
+        run: cd backend
 
       - name: Build docker image & push to docker hub
         uses: docker/build-push-action@v2
