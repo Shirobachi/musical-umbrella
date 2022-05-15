@@ -3,7 +3,6 @@
 	import Footer from './components/Footer.vue';
 	import { useTokenStore } from './stores/token'
 	import { computed } from 'vue';
-import { c } from '../dist/assets/index.10d5764e';
 
 	const token = useTokenStore()
 
