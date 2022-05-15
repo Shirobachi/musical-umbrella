@@ -31,9 +31,11 @@
 			Toast.success('Successfully signed up, you can now log in!');
 			// redirect to login
 			router.push('/sign-in');
-		}).catch((e) => {
+		})
+		.catch((e) => {
+			console.log("🚀 ~ file: Sign-up.vue ~ line 37 ~ submit ~ e.response", e.response)
 			if (e.response.data)
-				Toast.error( e.response.data.message || VITE_DEV ? '🚩 We have problem with response!' : "We struggling with goblins on out server 👺" );
+				Toast.error( e.response.data.message );
 			else
 				Toast.error( (VITE_DEV) ? "🔨 Did you start backend server?" : "We struggling with goblins on out server 👺" );
 		});
