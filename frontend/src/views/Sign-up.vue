@@ -7,13 +7,13 @@
 
 	const Toast = useToast();
 	const VITE_BASE_BACKEND_ENDPOINT = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
-	const VITE_DEBUG = import.meta.env.VITE_DEBUG;
+	const VITE_DEV = import.meta.env.VITE_DEV;
 
 	const user = ref({
-		name: VITE_DEBUG ? 'Tester' : '',
-		email: VITE_DEBUG ? 'test@example.com' : '',
-		password: VITE_DEBUG ? '2WxU0Gkx2q8VbcTPuNrJHonPuQn9yGLmIdvaMKfNuwD3ZwX3' : '',
-		passwordConfirmation: VITE_DEBUG ? '2WxU0Gkx2q8VbcTPuNrJHonPuQn9yGLmIdvaMKfNuwD3ZwX3' : '',
+		name: VITE_DEV ? 'Tester' : '',
+		email: VITE_DEV ? 'test@example.com' : '',
+		password: VITE_DEV ? '2WxU0Gkx2q8VbcTPuNrJHonPuQn9yGLmIdvaMKfNuwD3ZwX3' : '',
+		passwordConfirmation: VITE_DEV ? '2WxU0Gkx2q8VbcTPuNrJHonPuQn9yGLmIdvaMKfNuwD3ZwX3' : '',
 	})
 
 	const submit = () => {
@@ -33,9 +33,9 @@
 			router.push('/sign-in');
 		}).catch((e) => {
 			if (e.response.data)
-				Toast.error( e.response.data.message || VITE_DEBUG ? '🚩 We have problem with response!' : "We struggling with goblins on out server 👺" );
+				Toast.error( e.response.data.message || VITE_DEV ? '🚩 We have problem with response!' : "We struggling with goblins on out server 👺" );
 			else
-				Toast.error( (VITE_DEBUG) ? "🔨 Did you start backend server?" : "We struggling with goblins on out server 👺" );
+				Toast.error( (VITE_DEV) ? "🔨 Did you start backend server?" : "We struggling with goblins on out server 👺" );
 		});
 	}
 </script>

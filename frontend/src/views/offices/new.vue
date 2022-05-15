@@ -5,7 +5,7 @@
 	import { useTokenStore } from '../../stores/token'
 
 	const VITE_BASE_BACKEND_ENDPOINT = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
-	const VITE_DEBUG = import.meta.env.VITE_DEBUG || false;
+	const VITE_DEV = import.meta.env.VITE_DEV || false;
 	const token = useTokenStore()
 	const Toast = useToast();
 
@@ -41,7 +41,7 @@
 			router.push('/offices/1');
 		}).catch(e => {
 			console.log(e);
-			Toast.error(VITE_DEBUG ? 'Error: ' + e.message : 'Something went wrong!');
+			Toast.error(VITE_DEV ? 'Error: ' + e.message : 'Something went wrong!');
 		});
 	}
 
