@@ -5,6 +5,8 @@ const routes = [
   { name: "Sign-up", path: "/sign-up", component: () => import("./views/Sign-up.vue") },
   { name: "Sign-in", path: "/sign-in", component: () => import("./views/Sign-in.vue") },
   { name: "Sign-out", path: "/sign-out", component: () => import("./views/Sign-out.vue") },
+  { name: "Admin panel", path: "/admin", component: () => import("./views/admin.vue") },
+  { name: "Office new", path: "/offices/new", component: () => import("./views/offices/new.vue") },
 ];
 
 const router = createRouter({

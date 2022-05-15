@@ -17,6 +17,9 @@ app.use(bp.urlencoded({ extended: true }))
 const auth = require('./routers/auth');
 app.use('/auth', auth);
 
+const office = require('./routers/office');
+app.use('/office', office);
+
 // START
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

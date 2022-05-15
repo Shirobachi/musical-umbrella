@@ -68,13 +68,14 @@
 	<div class="mx-auto max-w-xs">
 		<form class="border-2 border-gray-600 shadow-md rounded px-8 pt-6 pb-8 mb-4">
 
-			<!-- INPUT: name -->
 			<div class="mb-4">
 				<div class="flex flex-col space-y-2 items-center justify-center">
+					<!-- INPUT: name -->
 					<input class="w-11/12 focus:w-full bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
 						type="text"
 						placeholder="name or e-mail"
 						v-model="user.name">
+					<!-- INPUT: pass -->
 					<input class="w-11/12 focus:w-full bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
 						type="password"
 						placeholder="Password"
