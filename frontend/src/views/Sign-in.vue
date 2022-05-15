@@ -23,7 +23,7 @@
 
 		axios({
 			method: 'GET',
-			url: `${base_URI}/auth`,
+			url: `${VITE_BASE_BACKEND_ENDPOINT}/auth`,
 			headers: {
 				Authorization: `Basic ${btoa(user.value.name + ":" + user.value.password)}`
 			} 
