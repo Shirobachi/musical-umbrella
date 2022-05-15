@@ -13,6 +13,6 @@ app.use(pinia)
 app.use(router)
 app.use(Toast, {
 	position: "bottom-right",
-	timeout: 2000,
+	timeout: 3000,
 })
 app.mount('#app')
