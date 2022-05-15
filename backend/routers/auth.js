@@ -145,25 +145,15 @@ router.post('/verify', async (req, res) => {
 		return
 	}
 
-	const JWT_SECRET = process.env.JWT_SECRET;
-	try{
-		var decoded = jwt.verify(token, JWT_SECRET);
-	}
-	catch (err) {
-		res.status(401).json({
-			message: 'Token is not valid'
+	const user = await common.decode(token);
+	if (!user) {
+		res.status(400).json({
+			message: 'Invalid token'
 		})
 		return
 	}
 
-	// get user from database
-	const db = await common.connectDB('users');
-	const user = await db.findOne({
-		email: decoded
-	});
-
 	res.status(200).json(user);
-
 });
 
 
