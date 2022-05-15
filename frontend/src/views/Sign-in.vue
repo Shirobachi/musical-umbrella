@@ -28,8 +28,31 @@
 				Authorization: `Basic ${btoa(user.value.name + ":" + user.value.password)}`
 			} 
 		}).then((r) => {
-			Toast.success('Successfully logged in!');	
-			token.setToken(r.data.token);
+			Toast.success('Successfully logged in!');
+
+			// Make request to API to know if user is admin
+			axios({
+				method: 'POST',
+				url: `${VITE_BASE_BACKEND_ENDPOINT}/auth/verify`,
+				data: {
+					token: r.data.token
+				}
+			}).then((r2) => {
+				console.log(r2.data)
+				token.setToken({
+					token: r.data.token,
+					isAdmin: r2.data.admin
+				})
+			}).catch((e) => {
+				Toast.error('Error verifying user');
+				token.setToken({
+					token: r.data.token,
+					isAdmin: false
+				})
+				console.error(e);
+			})
+
+
 			router.push('/');
 		}).catch((e) => {
 			if (e.response.data)
