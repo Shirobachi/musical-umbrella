@@ -133,6 +133,8 @@ router.get('/', async (req, res) => {
 	})
 });
 
+// '/auth/verify': data.token
+// 200: User{}
 router.post('/verify', async (req, res) => {
 	const token = req.body.token;
 
