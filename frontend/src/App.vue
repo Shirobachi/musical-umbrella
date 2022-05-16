@@ -55,10 +55,9 @@
 </script>
 
 <template>
-	<div>
+	<div class="mb-20">
 		<Menu :menuItems='menuItems'/>
 		<router-view class="my-10"></router-view>
-		<Footer/>
-
+		<Footer />
 	</div>
 </template>
