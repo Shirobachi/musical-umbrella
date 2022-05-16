@@ -222,6 +222,9 @@ router.put('/:_id', async (req, res) => {
 		});
 	}
 
+	// remove _id if exist
+	delete req.body._id;
+
 	// Connect DB
 	const db = await common.connectDB('offices');
 
