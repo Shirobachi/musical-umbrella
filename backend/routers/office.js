@@ -49,7 +49,7 @@ router.get('/', async (req, res) => {
 
 	// Get all
 	try{
-		const offices = await db.find().toArray();
+		var offices = await db.find().toArray();
 	
 		// remove _id
 		offices.forEach(office => {
@@ -57,6 +57,23 @@ router.get('/', async (req, res) => {
 			delete office.phone;
 			delete office.email;
 		});
+
+		var result = []
+		// if query q is set, filter offices
+		if (req.query.q) {
+			const query = req.query.q;
+			offices.forEach(office => {
+				for (const key in office) {
+					if(office[key].toString().toLowerCase().includes(query.toLowerCase())) {
+            console.log("🚀 ~ file: office.js ~ line 69 ~ router.get ~ office[key]", office[key])
+						result.push(office);
+						break;
+					}
+				}
+			});
+			offices = result;
+		}
+		
 
 		const settings = req.query || {};
     console.log("🚀 ~ file: office.js ~ line 66 ~ router.get ~ settings", settings)
