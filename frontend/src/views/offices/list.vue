@@ -4,7 +4,10 @@
 	import { useRoute } from 'vue-router';
 	import { useToast } from "vue-toastification";
 	import router from '../../router'
+	import Swal from 'sweetalert2'
+	import { useTokenStore } from '../../stores/token'
 
+	const token = useTokenStore()
 	const Toast = useToast();
 	const route = useRoute();
 	const VITE_BASE_BACKEND_ENDPOINT = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
@@ -54,13 +57,66 @@
 		return links;
 	}) 
 
-
 	const redirect = (id) => {
 		router.push(`/offices/${id}`);
 		data.value.items = [];
 		settings.value.page = id;
 		fetchData();
 	}
+		
+	const swalWithBootstrapButtons = Swal.mixin({
+		buttonsStyling: true
+	})
+
+	const deleteOffice = (id) => {
+		console.log(id);
+
+	swalWithBootstrapButtons.fire({
+		title: 'Are you sure you want delete it?',
+		text: "This will be permanently deleted (that's pretty long 😉)",
+		icon: 'warning',
+		showCancelButton: true,
+		confirmButtonText: 'Yes, delete it!',
+		cancelButtonText: 'No, cancel!',
+		reverseButtons: true
+	}).then((result) => {
+		if (result.isConfirmed) {
+
+			axios({
+				method: "DELETE",
+				url: `${VITE_BASE_BACKEND_ENDPOINT}/offices/${id}`,
+				headers: {
+					'Authorization': `Bearer ${token.token.token}`
+				}
+			}).then((r) => {
+				// if status == 200
+				swalWithBootstrapButtons.fire(
+					'Deleted!',
+					'Your file has been deleted.',
+					'success'
+				)
+			}).catch((e) => {
+				swalWithBootstrapButtons.fire(
+					'Something went wrong!',
+					'We struggling with goblins on out server 👺',
+					'error'
+				)
+			})
+
+			
+				
+		} else if ( result.dismiss === Swal.DismissReason.cancel ) {
+			swalWithBootstrapButtons.fire(
+				'Cancelled',
+				'The office is not deleted :)',
+				'info'
+			)
+		}
+	})
+
+
+	}
+
 
 </script>
 
@@ -108,7 +164,11 @@
 										${{ office.price }}/h
 									</td>
 									<td class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-										TBU
+										
+										<svg @click="deleteOffice(office['_id'])" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hover:text-red-600 hover:underline hover:cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+											<path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+										</svg>
+
 									</td>
 								</tr>
 
@@ -139,5 +199,9 @@
 			Add new office
 		</router-link>
 		</div>
+		
+
+    <vue3-snackbar bottom right :duration="4000"></vue3-snackbar>
+
 	</div>
 </template>
