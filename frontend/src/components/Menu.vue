@@ -1,6 +1,8 @@
 <script setup>
 	import { ref } from 'vue'
 
+	const logo = new URL("../assets/logo.png", import.meta.url).href
+
 	// props: token
 	const props = defineProps({
 		menuItems: Object
@@ -17,7 +19,7 @@
 				<!-- LOGO -->
 				<div>
 					<a href="#" class="flex items-center py-4 px-2">
-						<img src="https://dummyimage.com/300x200/000/fff&text=logo" alt="Logo" class="h-8 w-8 mr-2">
+						<img :src="logo" alt="Logo" class="h-20 mr-2">
 					</a>
 				</div>
 
