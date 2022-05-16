@@ -41,20 +41,6 @@ router.post('/', async (req, res) => {
 
 // GET '/': get all offices, auth: token
 router.get('/', async (req, res) => {
-	// console barer token
-	const token = req.headers.authorization;
-	if (!token) {
-		return res.status(401).json({
-			error: 'No token provided.'
-		});
-	}
-
-	const user = await common.decode(token.split(' ')[1]);
-	if(!user)
-		return res.status(401).json({
-			error: 'Unauthorized',
-		});
-
 	// connect to DB
 	const db = await common.connectDB('offices');
 
@@ -62,6 +48,14 @@ router.get('/', async (req, res) => {
 	try{
 		const offices = await db.find().toArray();
 	
+		// remove _id
+		offices.forEach(office => {
+			delete office._id;
+			delete office.size;
+			delete office.phone;
+			delete office.email;
+		});
+
 		const settings = req.query || {};
     console.log("🚀 ~ file: office.js ~ line 66 ~ router.get ~ settings", settings)
 		res.status(200).json(common.paging(offices, settings));

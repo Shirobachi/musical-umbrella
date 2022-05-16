@@ -26,9 +26,6 @@ import { set } from 'pinia/node_modules/vue-demi';
 		axios({
 			method: "GET",
 			url: `${VITE_BASE_BACKEND_ENDPOINT}/offices`,
-			headers: {
-				"Authorization": `Bearer ${localStorage.getItem('token')}`
-			},
 			params: settings.value
 		}).then((r) => {
 			data.value = r.data;
