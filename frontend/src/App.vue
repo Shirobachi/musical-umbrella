@@ -22,7 +22,7 @@
 		}
 
 		// add account buttons
-		if (token.token.token == "") {
+		if (!token.token.token || token.token.token == "") {
 			temp.optionalMenu = [
 				{
 					name: 'Sign up',
