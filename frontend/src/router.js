@@ -10,7 +10,7 @@ const routes = [
 
   { name: "Office admin list", path: "/offices/:page/:itemsPerPage", component: () => import("./views/offices/list.vue") },
   { name: "Office admin list", path: "/offices/:page", component: () => import("./views/offices/list.vue") },
-  { name: "Office new", path: "/offices/new", component: () => import("./views/offices/new.vue") },
+  { name: "New office", path: "/offices/new", component: () => import("./views/offices/form.vue") },
 ];
 
 const router = createRouter({
