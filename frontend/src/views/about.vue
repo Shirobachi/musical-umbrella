@@ -7,7 +7,7 @@
 
 		This repo is open source. You can find it here: <a class="text-blue-400 hover:cursor-pointer hover:underline" href="https://github.com/Shirobachi/musical-umbrella" target="_blank">https://github.com/Shirobachi/musical-umbrella</a> <br>
 		Check out my github: <a class="text-blue-400 hover:cursor-pointer hover:underline" href="https://github.com/Shirobachi">https://github.com/Shirobachi</a> <br>
-		Or send me a mail: <a class="text-blue-400 hover:cursor-pointer hover:underline" href="mailto:simon@hryszko.dev">mailto:simon@hryszko.dev</a>
+		Or send me a mail: <a class="text-blue-400 hover:cursor-pointer hover:underline" href="mailto:simon@hryszko.dev">simon@hryszko.dev</a>
 
 		<br>
 		<br>
