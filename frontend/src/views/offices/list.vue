@@ -65,11 +65,13 @@
 	}) 
 
 	const redirect = (id) => {
-		router.push(`/offices/${id}/${search.value}`);
-		data.value.items = [];
-		data.value.page = id;
-		settings.value.page = id;
-		fetchData();
+		if(id != "...") {
+			router.push(`/offices/${id}/${search.value}`);
+			data.value.items = [];
+			data.value.page = id;
+			settings.value.page = id;
+			fetchData();
+		}
 	}
 		
 	const swalWithBootstrapButtons = Swal.mixin({
@@ -215,7 +217,7 @@
 									<td colspan="4" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
 										<div class="flex justify-around">
 											<div class="flex">
-												<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : ''" class="rounded-md hover:bg-green-500 hover:cursor-pointer border p-2 m-1" v-for="link in paginationLinks" :key="link">
+												<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : (link == '...' ? '' : 'hover:bg-green-500 hover:cursor-pointer')" class="rounded-md border p-2 m-1" v-for="link in paginationLinks" :key="link">
 														{{link}}
 												</p> 
 											</div>

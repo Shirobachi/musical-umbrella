@@ -62,11 +62,13 @@
 	};fetchData()
 
 	const redirect = (id) => {
-		router.push(`/${id}/${search.value}`);
-		data.value.items = [];
-		data.value.page = id;
-		settings.value.page = id;
-		fetchData();
+		if(id != "...") {
+			router.push(`/${id}/${search.value}`);
+			data.value.items = [];
+			data.value.page = id;
+			settings.value.page = id;
+			fetchData();
+		}
 	}
 
 	const redirectToOffer = (id) => {
@@ -94,7 +96,7 @@
 
 		
 		<div class="flex justify-center mt-10">
-				<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : ''" class="rounded-md hover:bg-green-500 hover:cursor-pointer border p-2 m-1" v-for="link in paginationLinks" :key="link">
+				<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : (link == '...' ? '' : 'hover:bg-green-500 hover:cursor-pointer')" class="rounded-md border p-2 m-1" v-for="link in paginationLinks" :key="link">
 					{{link}}
 				</p> 
 		</div>
@@ -124,8 +126,8 @@
 			</div>
 		</div>
 		
-		<div class="flex justify-center">
-				<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : ''" class="rounded-md hover:bg-green-500 hover:cursor-pointer border p-2 m-1" v-for="link in paginationLinks" :key="link">
+		<div class="flex justify-center mt-10">
+				<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : (link == '...' ? '' : 'hover:bg-green-500 hover:cursor-pointer')" class="rounded-md border p-2 m-1" v-for="link in paginationLinks" :key="link">
 					{{link}}
 				</p> 
 		</div>
