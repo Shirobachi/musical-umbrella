@@ -182,7 +182,72 @@ router.delete('/:_id', async (req, res) => {
 			error: err.message,
 		});
 	}
+})
+
+// PUT '/:_id': update office by _id, auth: token
+router.put('/:_id', async (req, res) => {
+	// Check if token exist
+	const token = req.headers.authorization;
+
+	if (!token)
+		return res.status(401).json({
+			error: 'No token provided.'
+		});
+
+	// Check if token is valid
+	const isTokenValid = await common.decode(token.split(' ')[1]);
+	if(!isTokenValid)
+		return res.status(401).json({
+			error: 'Unauthorized',
+		});
+
+	// Check if id exist
+	const id = req.params._id;
+	if (!id)
+		return res.status(400).json({
+			error: 'No id provided.'
+		});
+
+	// Check if id is valid
+	try{
+		var objId = new ObjectID(id);
+	}
+	catch(err){
+		return res.status(400).json({
+			error: 'Invalid id',
+		});
+	}
+
+	// Connect DB
+	const db = await common.connectDB('offices');
+
+	// Update object by id
+	try{
+		const office = await db.findOneAndUpdate({
+			_id: objId,
+		}, {
+			$set: req.body,
+		});
+		if (!office || !office.value)
+			return res.status(404).json({
+				error: 'Office not found',
+			});
+				
+		res.status(200).json( req.body );
+	}
+	catch(err){
+		res.status(500).json({
+			error: err.message,
+		});
+	}
+
+
+
+
+
 
 })
+
+
 
 module.exports = router;
