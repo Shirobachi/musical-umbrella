@@ -45,10 +45,11 @@
 				headers: {
 					'Authorization': `Bearer ${token.token.token}`
 				},
-				data: office
+				data: office.value
 			}).then(r => {
+				console.log("🚀 ~ file: form.vue ~ line 50 ~ add ~ r", r.data)
 				Toast.info("Office added!");
-				router.push('/offices/1');
+				router.push('/offers/' + r.data._id);
 			}).catch(e => {
 				console.log(e);
 				Toast.error(VITE_DEV ? 'Error: ' + e.message : 'Something went wrong!');
@@ -91,7 +92,6 @@
 
 <template>
 	<div>
-		{{office}}
 		<div v-if="isEdit && office.name || !isEdit" class="flex flex-col space-y-2 items-center">
 			<input class="w-9/12 focus:w-10/12 bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
 				type="text"
