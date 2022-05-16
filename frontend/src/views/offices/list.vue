@@ -95,6 +95,7 @@
 						'Your file has been deleted.',
 						'success'
 					)
+					fetchData()
 				}).catch((e) => {
 					swalWithBootstrapButtons.fire(
 						'Something went wrong!',
