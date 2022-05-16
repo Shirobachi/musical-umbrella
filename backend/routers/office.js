@@ -38,7 +38,6 @@ router.post('/', async (req, res) => {
 	}
 }); 
 
-
 // GET '/': get all offices, auth: token
 router.get('/', async (req, res) => {
 	// connect to DB
@@ -57,7 +56,13 @@ router.get('/', async (req, res) => {
 
 		const settings = req.query || {};
     console.log("🚀 ~ file: office.js ~ line 66 ~ router.get ~ settings", settings)
-		res.status(200).json(common.paging(offices, settings));
+		const r = common.paging(offices, settings)
+		if(r.items.length == 0)
+			return res.status(404).json({
+				error: 'Page not found',
+			});
+
+		res.status(200).json(r);
 	}
 	catch(err){
 		res.status(500).json({
