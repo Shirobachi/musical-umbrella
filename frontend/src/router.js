@@ -7,6 +7,7 @@ const routes = [
   { name: "Sign-in", path: "/sign-in", component: () => import("./views/Sign-in.vue") },
   { name: "Sign-out", path: "/sign-out", component: () => import("./views/Sign-out.vue") },
   { name: "Offer", path: "/offers/:_id", component: () => import("./views/offer.vue") },
+  { name: "About", path: "/about", component: () => import("./views/about.vue") },
 
   { name: "Office admin list", path: "/offices/:page/:itemsPerPage", component: () => import("./views/offices/list.vue") },
   { name: "Office admin list", path: "/offices/:page", component: () => import("./views/offices/list.vue") },

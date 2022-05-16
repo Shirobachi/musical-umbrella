@@ -12,6 +12,10 @@
 				{
 					name: 'Home',
 					link: '/',
+				},
+				{
+					name: 'About',
+					link: '/about',
 				}
 			], 
 			optionalMenu: []
@@ -41,10 +45,13 @@
 
 		// add admin buttons
 		if (token.token.isAdmin) {
-			temp.mainMenu.push({
-				name: 'Admin',
-				link: '/offices/1',
-			})
+			// isnet admin at 
+			temp.mainMenu.splice(
+				1, 0, {
+					name: 'Admin',
+					link: '/admin',
+				}
+			)
 		}
 
 		return temp;
