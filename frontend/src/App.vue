@@ -44,7 +44,7 @@
 		}
 
 		// add admin buttons
-		if (token.token.isAdmin) {
+		if (token.token.token && token.token.isAdmin) {
 			// isnet admin at 
 			temp.mainMenu.splice(
 				1, 0, {
