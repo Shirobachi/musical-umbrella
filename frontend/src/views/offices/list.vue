@@ -66,8 +66,7 @@
 
 <template>
 	<div>
-		{{settings}}
-		<div class="flex flex-col">
+		<div class="flex flex-col w-10/12 mx-auto">
 			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
 					<div class="overflow-hidden">
@@ -117,12 +116,10 @@
 								<tr v-if="data.items.length !== 0" class="bg-white border-b">
 									<td colspan="4" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
 										<div class="flex justify-around">
-		
 											<div class="flex">
 												<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : ''" class="rounded-md hover:bg-green-500 hover:cursor-pointer border p-2 m-1" v-for="link in paginationLinks" :key="link">
 														{{link}}
 												</p> 
-
 											</div>
 
 											<!-- HERE CAN BE ADDED EASY INPUT WITH PER PAGE CHOOSE -->
@@ -133,24 +130,14 @@
 								</tr>
 							</tbody>
 						</table>
+						
 					</div>
 				</div>
 			</div>
-		</div>
-
-		<br>
-		<br>
-		<br>
-		<br>
-		<p @click="data.items.push({})">tesrt</p>
-		<br>
-		<br>
-		<hr>
 		<router-link to="/offices/new"
-			class="hover:cursor-pointer py-2 my-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">
+			class="text-center text-xl hover:text-blue-500 hover:underline hover:cursor-pointer py-2 my-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">
 			Add new office
 		</router-link>
-
-		this is page: {{ $route.params.page }}
+		</div>
 	</div>
 </template>

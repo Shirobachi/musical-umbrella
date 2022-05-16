@@ -49,9 +49,6 @@
 
 		return temp;
 	});
-
-
-	
 </script>
 
 <template>
