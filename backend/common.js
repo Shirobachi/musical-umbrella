@@ -43,7 +43,7 @@ async function isAdmin(token){
 
 function paging(arr, setting){
 	const page = setting.page || 1;
-	const perPage = setting.perPage || 3;
+	const perPage = setting.perPage || 12;
 	const start = (page - 1) * perPage;
 	const end = page * perPage;
 	return {

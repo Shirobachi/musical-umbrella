@@ -13,15 +13,12 @@
 
 	const data = ref(
 		{
-			items: [ {
-				name: "Loading..."
-			} ]
+			items: []
 		}
 	)
 	const settings = ref(
 		{
 			page: route.params.page || 1,
-			perPage: route.params.perPage || 10,
 		}
 	)
 
@@ -42,13 +39,16 @@
 
 		return links;
 	}) 
-
+	const search = ref(route.params.q || '');
 
 	const fetchData = () => {
 		axios({
 			method: "GET",
 			url: `${VITE_BASE_BACKEND_ENDPOINT}/offices`,
-			params: settings.value
+			params: {
+				q: search.value || "",
+				page: settings.value.page,
+			}
 		}).then((r) => {
 			data.value = r.data;
       console.log("🚀 ~ file: Home.vue ~ line 21 ~ fetchData ~ r.data", r.data)
@@ -60,8 +60,9 @@
 	};fetchData()
 
 	const redirect = (id) => {
-		router.push(`/${id}`);
+		router.push(`/${id}/${search.value}`);
 		data.value.items = [];
+		data.value.page = id;
 		settings.value.page = id;
 		fetchData();
 	}
@@ -79,8 +80,25 @@
 
 <template>
 	<div>
-		<div class="flex space-x-4 flex-wrap justify-center items-center">
+		<div class="flex justify-center space-x-3">
+			<input class="w-9/12 focus:w-10/12 bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
+			type="text"
+			placeholder="👀 What are you looking for?"
+			v-model="search">
+		<button @click="redirect(1)" class="bg-blue-500 hover:bg-blue-700 text-dark font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+			Search
+		</button>
+	</div>
 
+		
+		<div class="flex justify-center mt-10">
+				<p @click="redirect(link)" :class="link == data.page ? 'bg-green-500' : ''" class="rounded-md hover:bg-green-500 hover:cursor-pointer border p-2 m-1" v-for="link in paginationLinks" :key="link">
+					{{link}}
+				</p> 
+		</div>
+
+		<div v-if="data.items.length == 0" class="my-3 text-center text-2xl font-mono">Loading . . .</div>
+		<div class="flex space-x-4 flex-wrap justify-center items-center">
 			<div class="max-w-md py-4 px-8 text-center bg-white shadow-lg rounded-lg my-10 p-10" v-for="item in data.items" :key="item['_id']">
 				<div>
 					<h2 class="text-gray-800 text-3xl font-semibold">{{item.name}}</h2>
