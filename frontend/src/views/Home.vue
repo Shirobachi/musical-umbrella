@@ -3,7 +3,10 @@
 	import { computed, ref } from 'vue';
 	import { useToast } from "vue-toastification";
 	import { useRoute } from 'vue-router';
+	import { useTokenStore } from '../stores/token'
 	import router from '../router'
+
+	const token = useTokenStore()
 	const route = useRoute();
 	const Toast = useToast();
 	const VITE_BASE_BACKEND_ENDPOINT = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
@@ -63,6 +66,15 @@
 		fetchData();
 	}
 
+	const redirectToOffer = (id) => {
+		// check token
+		if (!token.token.token)
+			Toast.error("You need to login first");
+		else
+			router.push(`/offers/${id}`);
+		
+	}
+
 </script>
 
 <template>
@@ -82,9 +94,9 @@
 					</div>
 				</div>
 				<div class="flex justify-end mt-4">
-					<router-link :to="'/offer/' + item['_id']" class="text-xl font-medium text-indigo-500" v-if="item.price != undefined">
+					<p @click="redirectToOffer(item['_id'])" class="hover:cursor-pointer text-xl font-medium text-indigo-500" v-if="item.price != undefined">
 						See more
-					</router-link>
+					</p>
 					<a href="#" class="text-xl font-medium text-indigo-500" v-if="item.price != undefined"></a>
 				</div>
 			</div>
