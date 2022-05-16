@@ -9,7 +9,7 @@ router.post('/', async (req, res) => {
 	const token = req.headers.authorization;
 	if (!token) {
 		return res.status(401).json({
-			error: 'No token provided.'
+			message: 'No token provided.'
 		});
 	}
 
@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
 	if (!isAdmin)
 		return res.status(401).json({
-			error: 'Unauthorized',
+			message: 'Unauthorized',
 		});
 
 	// get data from request
@@ -37,7 +37,7 @@ router.post('/', async (req, res) => {
 	}
 	catch(err){
 		res.status(500).json({
-			error: err.message,
+			message: err.message,
 		});
 	}
 }); 
@@ -80,14 +80,14 @@ router.get('/', async (req, res) => {
 		const r = common.paging(offices, settings)
 		if(r.items.length == 0)
 			return res.status(404).json({
-				error: 'Page not found',
+				message: 'No results found.'
 			});
 
 		res.status(200).json(r);
 	}
 	catch(err){
 		res.status(500).json({
-			error: err.message,
+			message: err.message,
 		});
 	}
 
@@ -104,7 +104,7 @@ router.get('/:_id', async (req, res) => {
   console.log("🚀 ~ file: office.js ~ line 74 ~ router.get ~ token", token)
 	if (!token) {
 		return res.status(401).json({
-			error: 'No token provided.'
+			message: 'No token provided.'
 		});
 	}
 
@@ -113,7 +113,7 @@ router.get('/:_id', async (req, res) => {
   console.log("🚀 ~ file: office.js ~ line 82 ~ router.get ~ isTokenValid", isTokenValid)
 	if(!isTokenValid)
 		return res.status(401).json({
-			error: 'Unauthorized',
+			message: 'Unauthorized',
 		});
 
 
@@ -131,14 +131,14 @@ router.get('/:_id', async (req, res) => {
 
 		if (!office)
 			return res.status(404).json({
-				error: 'Office not found',
+				message: 'Office not found',
 			});
 
 		res.status(200).json(office);
 	}
 	catch(err){
 		res.status(500).json({
-			error: err.message,
+			message: err.message,
 		});
 	}
 
@@ -150,7 +150,7 @@ router.delete('/:_id', async (req, res) => {
 	const token = req.headers.authorization;
 	if (!token) {
 		return res.status(401).json({
-			error: 'No token provided.'
+			message: 'No token provided.'
 		});
 	}
 
@@ -158,14 +158,14 @@ router.delete('/:_id', async (req, res) => {
 	const isTokenValid = await common.decode(token.split(' ')[1]);
 	if(!isTokenValid)
 		return res.status(401).json({
-			error: 'Unauthorized',
+			message: 'Unauthorized',
 		});
 
 	// validate id
 	const id = req.params._id;
 	if (!id) {
 		return res.status(400).json({
-			error: 'No id provided.'
+			message: 'No id provided.'
 		});
 	}
 
@@ -175,7 +175,7 @@ router.delete('/:_id', async (req, res) => {
 	}
 	catch(err){
 		return res.status(400).json({
-			error: 'Invalid id',
+			message: 'Invalid id',
 		});
 	}
 
@@ -189,7 +189,7 @@ router.delete('/:_id', async (req, res) => {
 		});
 		if (!office || !office.value)
 			return res.status(404).json({
-				error: 'Office not found',
+				message: 'Office not found',
 			});
 				
 		res.status(200).json(
@@ -200,7 +200,7 @@ router.delete('/:_id', async (req, res) => {
 	}
 	catch(err){
 		res.status(500).json({
-			error: err.message,
+			message: err.message,
 		});
 	}
 })
@@ -212,21 +212,21 @@ router.put('/:_id', async (req, res) => {
 
 	if (!token)
 		return res.status(401).json({
-			error: 'No token provided.'
+			message: 'No token provided.'
 		});
 
 	// Check if token is valid
 	const isTokenValid = await common.decode(token.split(' ')[1]);
 	if(!isTokenValid)
 		return res.status(401).json({
-			error: 'Unauthorized',
+			message: 'Unauthorized',
 		});
 
 	// Check if id exist
 	const id = req.params._id;
 	if (!id)
 		return res.status(400).json({
-			error: 'No id provided.'
+			message: 'No id provided.'
 		});
 
 	// Check if id is valid
@@ -235,7 +235,7 @@ router.put('/:_id', async (req, res) => {
 	}
 	catch(err){
 		return res.status(400).json({
-			error: 'Invalid id',
+			message: 'Invalid id',
 		});
 	}
 
@@ -254,14 +254,14 @@ router.put('/:_id', async (req, res) => {
 		});
 		if (!office || !office.value)
 			return res.status(404).json({
-				error: 'Office not found',
+				message: 'Office not found',
 			});
 				
 		res.status(200).json( req.body );
 	}
 	catch(err){
 		res.status(500).json({
-			error: err.message,
+			message: err.message,
 		});
 	}
 

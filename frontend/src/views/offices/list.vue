@@ -37,8 +37,11 @@
 			data.value = r.data;
 		})
 		.catch((e) => {
+      console.log("🚀 ~ file: list.vue ~ line 40 ~ fetchData ~ e", e)
 			Toast.error(e.response.data.message || "We struggling with goblins on out server 👺");
+      console.log("🚀 ~ file: list.vue ~ line 42 ~ fetchData ~ e.response", e.response)
 			console.error(e);
+			noData.value = true;
 		})
 	}
 	fetchData();
@@ -73,6 +76,7 @@
 		buttonsStyling: true
 	})
 
+	const noData = ref(false)
 	const deleteOffice = (id) => {
 		console.log(id);
 
@@ -171,7 +175,7 @@
 								<!-- Loading if loading -->
 								<tr v-if="data.items.length == 0" class="bg-white border-b">
 									<td colspan="4" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-										Loading data..
+										{{ noData ? 'No results!' : 'Loading data . . .'}}
 									</td>
 								</tr>
 

@@ -40,6 +40,7 @@
 		return links;
 	}) 
 	const search = ref(route.params.q || '');
+	const noData = ref(false)
 
 	const fetchData = () => {
 		axios({
@@ -56,6 +57,7 @@
 		.catch((e) => {
 			Toast.error(e.response.data.message || "We struggling with goblins on out server 👺");
 			console.error(e);
+			noData.value = true;
 		})
 	};fetchData()
 
@@ -97,7 +99,9 @@
 				</p> 
 		</div>
 
-		<div v-if="data.items.length == 0" class="my-3 text-center text-2xl font-mono">Loading . . .</div>
+		<div v-if="data.items.length == 0" class="my-3 text-center text-2xl font-mono">
+			{{ noData ? 'No results!' : 'Loading data . . .'}}
+		</div>
 		<div class="flex space-x-4 flex-wrap justify-center items-center">
 			<div class="max-w-md py-4 px-8 text-center bg-white shadow-lg rounded-lg my-10 p-10" v-for="item in data.items" :key="item['_id']">
 				<div>
