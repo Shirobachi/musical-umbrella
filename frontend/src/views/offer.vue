@@ -38,7 +38,7 @@ b<script setup>
 					<iframe class="w-screen h-[75vh]" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" :src="'https://maps.google.com/maps?hl=en&amp;q=' + item.location + '&amp;t=k&amp;z=15&amp;ie=UTF8&amp;iwloc=B&amp;output=embed'"></iframe>
 				</div>
 				<div class="px-5 flex">
-					<div class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-0 relative z-10 shadow-md">
+					<div class="lg:w-1/3 md:w-1/2 bg-white rounded-lg p-8 flex flex-col md:ml-auto w-full mt-10 md:mt-3 relative z-10 shadow-md">
 						<h2 class="text-gray-900 text-lg mb-1 font-medium title-font">{{item.name}}</h2>
 						<p class="leading-relaxed mb-1 text-gray-600"> 💰 Price: ${{item.price}} / hour </p>
 						<p class="leading-relaxed mb-1 text-gray-600"> 🗺️ Location: {{item.location}} </p>
