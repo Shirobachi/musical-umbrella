@@ -22,15 +22,17 @@
       console.log("🚀 ~ file: form.vue ~ line 21 ~ add ~ office", office.value)
 			delete tempOffice._id;
       console.log("🚀 ~ file: form.vue ~ line 21 ~ add ~ office", office.value)
-
+			
+			console.log("🚀 ~ file: form.vue ~ line 31 ~ add ~ tempOffice", tempOffice.value)
 			axios({
 				method: "PUT",
 				url: `${VITE_BASE_BACKEND_ENDPOINT}/offices/${office.value['_id']}`,
-				data: tempOffice,
+				data: tempOffice.value,
 				headers: {
 					Authorization: `Bearer ${token.token.token}`
 				}
 			}).then((r) => {
+        console.log("🚀 ~ file: form.vue ~ line 34 ~ add ~ r", r)
 				Toast.success("Office updated successfully");
 				router.push('/offers/' + office.value._id);
 			}).catch((e) => {
