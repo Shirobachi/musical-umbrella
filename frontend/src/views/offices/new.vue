@@ -48,7 +48,7 @@
 </script>
 
 <template>
-	<div class="container ">
+	<div>
 		<div class="flex flex-col space-y-2 items-center">
 			<input class="w-11/12 focus:w-full bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
 				type="text"
