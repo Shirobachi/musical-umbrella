@@ -55,8 +55,7 @@
 </script>
 
 <template>
-	<div class="container">
-
+	<div>
 		<Menu :menuItems='menuItems'/>
 		<router-view class="my-10"></router-view>
 		<Footer/>
