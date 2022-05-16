@@ -86,10 +86,10 @@
 					<h2 class="text-gray-800 text-3xl font-semibold">{{item.name}}</h2>
 					<div class="mt-2 text-gray-600" v-if="item.price != undefined">
 						<div class="pt-4 pb-2 text-center">
-							<p class="inline-block bg-blue-200 hover:bg-blue-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">Only ${{item.price}} per hour</p>
-							<p class="inline-block bg-cyan-300 hover:bg-cyan-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">{{item.location}}</p>
-							<p class="inline-block bg-purple-300 hover:bg-purple-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">{{item.floor == 0 ? 'Ground' : (item.floor + ' floor')}}</p>
-							<p class="inline-block bg-orange-300 hover:bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">Up to {{item.maxPeople}} people</p>
+							<p class="inline-block bg-blue-200 hover:bg-blue-300 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">💰 Only ${{item.price}} per hour</p>
+							<p class="inline-block bg-cyan-300 hover:bg-cyan-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">🗺️ {{item.location}}</p>
+							<p class="inline-block bg-purple-300 hover:bg-purple-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">🏚️ {{item.floor == 0 ? 'Ground' : (item.floor + ' floor')}}</p>
+							<p class="inline-block bg-orange-300 hover:bg-orange-400 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-4 mb-2">🧑‍🤝‍🧑 Up to {{item.maxPeople}} people</p>
 						</div>
 					</div>
 				</div>
