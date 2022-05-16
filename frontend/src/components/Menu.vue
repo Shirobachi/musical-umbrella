@@ -18,9 +18,9 @@
 			<div class="flex justify-between">
 				<!-- LOGO -->
 				<div>
-					<a href="#" class="flex items-center py-4 px-2">
+					<router-link to="/">
 						<img :src="logo" alt="Logo" class="h-20 mr-2">
-					</a>
+					</router-link>
 				</div>
 
 				<!-- MANN MENU -->

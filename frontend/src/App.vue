@@ -49,7 +49,7 @@
 			temp.mainMenu.splice(
 				1, 0, {
 					name: 'Admin',
-					link: '/admin',
+					link: '/offices/1',
 				}
 			)
 		}
