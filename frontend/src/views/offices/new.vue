@@ -72,7 +72,7 @@
 
 			<input class="w-11/12 focus:w-full bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
 				type="text"
-				placeholder="Name of office"
+				placeholder="Size (in m2)"
 				v-model="props.office.size">
 
 			<input class="w-11/12 focus:w-full bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
