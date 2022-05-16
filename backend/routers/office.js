@@ -118,4 +118,66 @@ router.get('/:_id', async (req, res) => {
 
 });
 
+// DEL '/:_id': delete office by _id, auth: token
+router.delete('/:_id', async (req, res) => {
+	// validate token
+	const token = req.headers.authorization;
+	if (!token) {
+		return res.status(401).json({
+			error: 'No token provided.'
+		});
+	}
+
+	// validate token valid
+	const isTokenValid = await common.decode(token.split(' ')[1]);
+	if(!isTokenValid)
+		return res.status(401).json({
+			error: 'Unauthorized',
+		});
+
+	// validate id
+	const id = req.params._id;
+	if (!id) {
+		return res.status(400).json({
+			error: 'No id provided.'
+		});
+	}
+
+	// Check id valid
+	try{
+		var objId = new ObjectID(id);
+	}
+	catch(err){
+		return res.status(400).json({
+			error: 'Invalid id',
+		});
+	}
+
+	// Connect DB
+	const db = await common.connectDB('offices');
+
+	// Delete object by id
+	try{
+		const office = await db.findOneAndDelete({
+			_id: objId,
+		});
+		if (!office)
+			return res.status(404).json({
+				error: 'Office not found',
+			});
+
+		res.status(200).json(
+			{
+				message: 'Office deleted',
+			}
+		);
+	}
+	catch(err){
+		res.status(500).json({
+			error: err.message,
+		});
+	}
+
+})
+
 module.exports = router;
