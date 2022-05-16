@@ -1,7 +1,7 @@
 const express = require('express');
 const common = require('../common'); // Import common.js with the functions
 const router = express.Router();
-
+const ObjectID = require('mongodb').ObjectID;
 
 // POST 'office': data office{}, auth: token
 router.post('/', async (req, res) => {
@@ -58,6 +58,57 @@ router.get('/', async (req, res) => {
 		const settings = req.query || {};
     console.log("🚀 ~ file: office.js ~ line 66 ~ router.get ~ settings", settings)
 		res.status(200).json(common.paging(offices, settings));
+	}
+	catch(err){
+		res.status(500).json({
+			error: err.message,
+		});
+	}
+
+});
+
+// GET '/:_id': get office by _id, auth: token
+router.get('/:_id', async (req, res) => {
+	// const id
+	const id = req.params._id;
+  console.log("🚀 ~ file: office.js ~ line 74 ~ router.get ~ id", id)
+	
+	// check token
+	const token = req.headers.authorization;
+  console.log("🚀 ~ file: office.js ~ line 74 ~ router.get ~ token", token)
+	if (!token) {
+		return res.status(401).json({
+			error: 'No token provided.'
+		});
+	}
+
+	// check token valid
+	const isTokenValid = await common.decode(token.split(' ')[1]);
+  console.log("🚀 ~ file: office.js ~ line 82 ~ router.get ~ isTokenValid", isTokenValid)
+	if(!isTokenValid)
+		return res.status(401).json({
+			error: 'Unauthorized',
+		});
+
+
+	// Connect DB
+	const db = await common.connectDB('offices');
+  console.log("🚀 ~ file: office.js ~ line 97 ~ router.get ~ objId", objId)
+  console.log("🚀 ~ file: office.js ~ line 97 ~ router.get ~ id", id)
+	// Get by _id
+	try{
+		var objId = new ObjectID(id); 
+		const office = await db.findOne({
+			_id: objId,
+		});
+    console.log("🚀 ~ file: office.js ~ line 104 ~ router.get ~ office", office)
+
+		if (!office)
+			return res.status(404).json({
+				error: 'Office not found',
+			});
+
+		res.status(200).json(office);
 	}
 	catch(err){
 		res.status(500).json({
