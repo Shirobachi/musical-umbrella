@@ -28,8 +28,12 @@ router.post('/', async (req, res) => {
 
 	// insert data
 	try{
-		await db.insertOne(office);
-		res.status(201).json(office)
+		const addedOffice = await db.insertOne(office);
+    console.log("🚀 ~ file: office.js ~ line 32 ~ router.post ~ addedOffice", addedOffice.insertedId)
+		res.status(201).json({
+			_id: addedOffice.insertedId,
+			...office
+		});
 	}
 	catch(err){
 		res.status(500).json({
