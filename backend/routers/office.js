@@ -161,11 +161,11 @@ router.delete('/:_id', async (req, res) => {
 		const office = await db.findOneAndDelete({
 			_id: objId,
 		});
-		if (!office)
+		if (!office || !office.value)
 			return res.status(404).json({
 				error: 'Office not found',
 			});
-
+				
 		res.status(200).json(
 			{
 				message: 'Office deleted',
