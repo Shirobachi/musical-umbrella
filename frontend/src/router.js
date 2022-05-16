@@ -11,6 +11,7 @@ const routes = [
   { name: "About", path: "/about", component: () => import("./views/about.vue") },
 
   { name: "Office admin list", path: "/offices/:page", component: () => import("./views/offices/list.vue") },
+  { name: "Office admin list with serach", path: "/offices/:page/:q", component: () => import("./views/offices/list.vue") },
   { name: "New office", path: "/offices/new", component: () => import("./views/offices/form.vue") },
   { name: "edit office", path: "/offices/edit/:id", component: () => import("./views/offices/form.vue") },
 ];

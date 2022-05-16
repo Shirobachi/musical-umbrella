@@ -15,7 +15,6 @@
 	const settings = ref(
 		{
 			page: route.params.page || 1,
-			perPage: route.params.perPage || 10,
 		}
 	)
 	const data = ref(
@@ -23,12 +22,17 @@
 			items: [ ]
 		}
 	)
-	
+
+	const search = ref(route.params.q || '')
+
 	const fetchData = () => {
 		axios({
 			method: "GET",
 			url: `${VITE_BASE_BACKEND_ENDPOINT}/offices`,
-			params: settings.value
+			params: {
+				q: search.value || '',
+				page: settings.value.page,
+			}
 		}).then((r) => {
 			data.value = r.data;
 		})
@@ -58,8 +62,9 @@
 	}) 
 
 	const redirect = (id) => {
-		router.push(`/offices/${id}`);
+		router.push(`/offices/${id}/${search.value}`);
 		data.value.items = [];
+		data.value.page = id;
 		settings.value.page = id;
 		fetchData();
 	}
@@ -125,6 +130,21 @@
 
 <template>
 	<div>
+
+		<div>
+			<div class="flex justify-center space-x-3">
+				<input class="w-9/12 focus:w-10/12 bg-gray-600 shadow appearance-none border rounded py-2 px-3 text-gray-400 leading-tight focus:outline-none focus:shadow-outline"
+				type="text"
+				placeholder="👀 What are you looking for?"
+				v-model="search"
+				@keyup.enter="redirect(1)" >
+
+				<button @click="redirect(1)" class="bg-blue-500 hover:bg-blue-700 text-dark font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">
+					Search
+				</button>
+			</div>
+		</div>
+
 		<div class="flex flex-col w-10/12 mx-auto">
 			<div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
 				<div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
