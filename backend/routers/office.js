@@ -50,7 +50,6 @@ router.get('/', async (req, res) => {
 	
 		// remove _id
 		offices.forEach(office => {
-			delete office._id;
 			delete office.size;
 			delete office.phone;
 			delete office.email;

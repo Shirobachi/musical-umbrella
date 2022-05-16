@@ -1,8 +1,7 @@
 <script setup>
 	import axios from 'axios';
-import { set } from 'pinia/node_modules/vue-demi';
 	import { computed, ref } from 'vue';
-	import { useRouter, useRoute } from 'vue-router';
+	import { useRoute } from 'vue-router';
 	import { useToast } from "vue-toastification";
 	import router from '../../router'
 
