@@ -5,6 +5,7 @@
 	import { useTokenStore } from '../../stores/token'
 	import { useRoute } from 'vue-router';
 	import { ref } from 'vue';
+	import Loading from '../../components/loading.vue';
 
 	const route = useRoute();
 	const VITE_BASE_BACKEND_ENDPOINT = import.meta.env.VITE_BASE_BACKEND_ENDPOINT;
@@ -141,7 +142,7 @@
 				{{ isEdit ? 'Edit this office' : 'Add new office'}}
 			</button>
 		</div>	
-		<div v-else class="text-center text-2xl font-mono">Loading . . .</div>
+		<Loading v-else/>
 
 	</div>
 </template>

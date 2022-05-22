@@ -3,6 +3,7 @@ b<script setup>
 	import { ref } from 'vue';
 	import { useRoute } from 'vue-router';
 	import { useTokenStore } from '../stores/token'
+	import Loading from '../components/loading.vue';
 
 	const token = useTokenStore()
 	const route = useRoute();
@@ -30,7 +31,7 @@ b<script setup>
 
 <template>
 	<div>
-		<div v-if="!item.name" class="text-center text-2xl font-mono">Loading . . .</div>
+		<Loading v-if="!item.name"/>
 		<div v-else>
 			<!-- https://www.embedmymap.com/ -->
 			<section class="text-gray-600 relative">

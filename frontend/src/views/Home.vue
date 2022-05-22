@@ -5,6 +5,7 @@
 	import { useRoute } from 'vue-router';
 	import { useTokenStore } from '../stores/token'
 	import router from '../router'
+	import Loading from '../components/loading.vue';
 
 	const token = useTokenStore()
 	const route = useRoute();
@@ -101,8 +102,10 @@
 				</p> 
 		</div>
 
+
 		<div v-if="data.items.length == 0" class="my-3 text-center text-2xl font-mono">
-			{{ noData ? 'No results!' : 'Loading data . . .'}}
+			<Loading v-if="!noData"/>
+			<p v-if="noData">No results!</p>
 		</div>
 		<div class="flex space-x-4 flex-wrap justify-center items-center">
 			<div class="max-w-md py-4 px-8 text-center bg-white shadow-lg rounded-lg my-10 p-10" v-for="item in data.items" :key="item['_id']">

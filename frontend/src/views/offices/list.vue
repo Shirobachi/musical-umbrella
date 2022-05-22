@@ -6,6 +6,7 @@
 	import router from '../../router'
 	import Swal from 'sweetalert2'
 	import { useTokenStore } from '../../stores/token'
+	import Loading from '../../components/loading.vue';
 
 	const token = useTokenStore()
 	const Toast = useToast();
@@ -177,7 +178,8 @@
 								<!-- Loading if loading -->
 								<tr v-if="data.items.length == 0" class="bg-white border-b">
 									<td colspan="4" class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-										{{ noData ? 'No results!' : 'Loading data . . .'}}
+										<loading  color="bg-green-600"/>
+										<p v-if="noData">No results!</p>
 									</td>
 								</tr>
 
